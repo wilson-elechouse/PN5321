@@ -1,10 +1,9 @@
 {
   "$schema": "https://raw.githubusercontent.com/platformio/platformio-core/develop/platformio/assets/schema/library.json",
   "name": "PN532-Arduino",
-  "description": "This is Seeed-Studio's library for PN532 to use NFC technology.",
+  "description": "ELECHOUSE PN5321-compatible Arduino NFC library and ESP32-C3 UART range test for PV532 V3.5 modules with the FSVP532 controller.",
   "authors": [
     {
-      "maintainer": true,
       "name": "Baozhu Zuo",
       "email": "zuobaozhu@gmail.com",
       "url": "https://github.com/Pillar1989"
@@ -22,12 +21,14 @@
       "url": "https://github.com/JiapengLi"
     },
     {
+      "name": "ELECHOUSE",
+      "maintainer": true,
       "url": "https://github.com/wilson-elechouse"
     }
   ],
   "frameworks": ["arduino"],
   "platforms": ["*"],
-  "keywords": ["PN532", "NFC"],
+  "keywords": ["ELECHOUSE", "PV532", "FSVP532", "PN5321", "PN532", "NFC", "RFID"],
   "headers": [
     "PN532.h",
     "PN532_HSU.h",
@@ -36,7 +37,7 @@
     "PN532_SWHSU.h"
   ],
   "repository": {
-    "url": "https://github.com/Seeed-Studio/PN532.git",
+    "url": "https://github.com/wilson-elechouse/PN5321.git",
     "branch": "arduino",
     "type": "git"
   },
@@ -53,12 +54,12 @@
     {
       "name": "FeliCa card detection",
       "base": "examples/FeliCa_card_detection",
-      "files": ["FeliCa_card_detection.pde"]
+      "files": ["FeliCa_card_detection.ino"]
     },
     {
       "name": "FeliCa card read",
       "base": "examples/FeliCa_card_read",
-      "files": ["FeliCa_card_read.pde"]
+      "files": ["FeliCa_card_read.ino"]
     },
     {
       "name": "Android Host-based card emulation",
@@ -73,27 +74,27 @@
     {
       "name": "Read ISO14443A UID",
       "base": "examples/iso14443a_uid",
-      "files": ["iso14443a_uid.pde"]
+      "files": ["iso14443a_uid.ino"]
     },
     {
       "name": "Format a clean Mifare Classic 1K card as an NFC Forum tag",
       "base": "examples/mifareclassic_formatndef",
-      "files": ["mifareclassic_formatndef.pde"]
+      "files": ["mifareclassic_formatndef.ino"]
     },
     {
       "name": "Dump the contents of a Mifare Classic 1K card",
       "base": "examples/mifareclassic_memdump",
-      "files": ["mifareclassic_memdump.pde"]
+      "files": ["mifareclassic_memdump.ino"]
     },
     {
       "name": "Resets the authentication keys back to the Mifare Classic defaults",
       "base": "examples/mifareclassic_ndeftoclassic",
-      "files": ["mifareclassic_ndeftoclassic.pde"]
+      "files": ["mifareclassic_ndeftoclassic.ino"]
     },
     {
       "name": "Updates a Mifare Classic that is already formatted for NDEF",
       "base": "examples/mifareclassic_updatendef",
-      "files": ["mifareclassic_updatendef.pde"]
+      "files": ["mifareclassic_updatendef.ino"]
     },
     {
       "name": "NTAG21x password protection",
@@ -118,7 +119,7 @@
     {
       "name": "Read Mifare card",
       "base": "examples/readMifare",
-      "files": ["readMifare.pde"]
+      "files": ["readMifare.ino"]
     }
   ]
 }
