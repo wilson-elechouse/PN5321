@@ -1,7 +1,7 @@
 {
   "$schema": "https://raw.githubusercontent.com/platformio/platformio-core/develop/platformio/assets/schema/library.json",
   "name": "PN532-Arduino",
-  "description": "ELECHOUSE PN5321-compatible Arduino NFC library and ESP32-C3 UART range test for PV532 V3.5 modules with the FSVP532 controller.",
+  "description": "Shared Arduino NFC library for ELECHOUSE PN532 and PN5321-compatible modules, with I2C, SPI and UART transports and ESP32-C3 test examples.",
   "authors": [
     {
       "name": "Baozhu Zuo",
@@ -28,7 +28,7 @@
   ],
   "frameworks": ["arduino"],
   "platforms": ["*"],
-  "keywords": ["ELECHOUSE", "PV532", "FSVP532", "PN5321", "PN532", "NFC", "RFID"],
+  "keywords": ["ELECHOUSE", "PN532", "PN5321", "NFC", "RFID"],
   "headers": [
     "PN532.h",
     "PN532_HSU.h",

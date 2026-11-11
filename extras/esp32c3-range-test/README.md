@@ -1,10 +1,10 @@
-# ELECHOUSE PV532 ESP32-C3 UART Card Range Test
+# ESP32-C3 PN532 UART Card Range Test
 
-Standalone card identification and manual reading-distance test for the
-[ELECHOUSE PV532 V3.5](https://www.elechouse.com/product/pv532-nfc-rfid-module-v3-5/)
-and compatible PN532-command readers. PV532 V3.5 uses **FSVP532, compatible with
-PN5321**, with module firmware **1.6**. PN532/PN5321 names in the source refer to
-the compatible command protocol, not a claim about the fitted chip's brand.
+A standalone card-identification and manual reading-distance test for
+PN532 and PN5321-compatible readers using the HSU UART command interface.
+It is shared test software; module specifications and electrical connections
+remain specific to the selected hardware. See the [ELECHOUSE module table](../../README.md#elechouse-modules)
+for product pages and manuals.
 
 The complete sketch is in
 [PN532_All_Cards_UART_Range_Test](PN532_All_Cards_UART_Range_Test).
@@ -15,21 +15,22 @@ bounded HSU driver and does not require the general NFC library or NDEF.
 
 The reference host is a **LuatOS CORE-ESP32-C3** with a CH343 USB-UART bridge.
 
-| PV532 V3.5 | LuatOS CORE-ESP32-C3 |
+| Reader signal | LuatOS CORE-ESP32-C3 |
 | --- | --- |
-| H8 pin 4 TX / SDA | GPIO4 / IO04, UART1 RX |
-| H8 pin 3 RX / SCL | GPIO5 / IO05, UART1 TX |
-| H8 pin 5 VCC | 3.3 V |
-| H8 pin 6 GND | GND |
+| UART TX | GPIO4 / IO04, UART1 RX |
+| UART RX | GPIO5 / IO05, UART1 TX |
+| Supply input | Supply specified by the reader module |
+| GND | GND |
 
-Leave the jumpers marked **SPI** and **I2C** open for HSU UART, and power cycle
-after changing mode. All module communication signals are **3.3 V logic only**,
-including when VCC is powered from 5 V. RESET may be left unconnected here.
+Select HSU UART using the module's own mode-selection instructions, then power
+cycle it. Connector positions and jumper names differ between products.
+Use a supply within the module's rated range and signal levels compatible with
+the 3.3 V ESP32-C3; add level conversion where required. This test does not
+control a module reset pin.
 
 Both serial links use **115200 baud, 8N1**. On the reference host, D4 is GPIO12
 and lights on a successful result; D5 is GPIO13 and stays off. These LED pins
 are board-specific. Adapt them before using a different ESP32-C3 board.
-The classic ESP32 library examples in the product manual use other host pins.
 
 ## Protocol entries and criteria
 
@@ -153,17 +154,17 @@ That record verifies the exercised Type A identification path. Type B, FeliCa,
 Jewel/Topaz and ST SR paths still need the appropriate real cards. Simulated
 PN532 frames do not substitute for card-distance measurements. The GPIO12 LED
 drive was checked in code/logs, without camera confirmation of the physical LED.
-The ELECHOUSE documentation update does not add a new hardware-validation claim.
+These recorded checks do not validate every module, card or protocol combination.
 
 ## References
 
-- [ELECHOUSE PV532 V3.5 product and downloads](https://www.elechouse.com/product/pv532-nfc-rfid-module-v3-5/)
+- [ELECHOUSE modules and product documentation](../../README.md#elechouse-modules)
 - [Compatible PN532 command reference](https://www.nxp.com/docs/en/user-guide/141520.pdf)
 - [NXP MIFARE card identification AN10833](https://www.nxp.com/docs/en/application-note/AN10833.pdf)
 - [NTAG213/215/216 READ and GET_VERSION](https://www.nxp.com/docs/en/data-sheet/NTAG213_215_216.pdf)
 - [ST SRI/SRT/ST25TB tool reference](https://www.st.com/resource/en/user_manual/um1084-cr95hf-development-software-stmicroelectronics.pdf)
 - [libnfc PN53x implementation used for protocol cross-checking](https://github.com/nfc-tools/libnfc/blob/master/libnfc/chips/pn53x.c)
 
-The compatible-command references are not claims that PV532 V3.5 uses an
-original NXP-branded chip. The test driver implements its protocol handling
-independently; libnfc source was not copied into the firmware.
+The test driver implements its protocol handling independently; libnfc source
+was not copied into the firmware. Chip identity and hardware capabilities are
+defined by each module's product documentation.
