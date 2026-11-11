@@ -15,6 +15,19 @@ It is for [NFC Shield](https://www.seeedstudio.com/NFC-Shield-V2-0.html) and [Gr
 - Support [mbed platform](https://os.mbed.com/teams/Seeed/code/PN532/)
 - Card emulation (NFC Type 4 tag)
 
+## ESP32-C3 UART card range test
+
+The standalone [PN5321 UART range test](extras/esp32c3-range-test/README.md)
+supports ISO14443A, ISO14443B, FeliCa 212/424, Jewel/Topaz, and a dedicated
+ST SR/SRI/SRT/ST25TB identification path on the LuatOS CORE-ESP32-C3.
+It defaults to automatic scanning with card-ID detection, drives the onboard
+D4 LED on success, and reports manually entered sample names and distances
+with 20-attempt statistics. Optional Classic and Type 2 data-read modes are
+separate from the ID-only distance criterion. No card data is written.
+
+See the linked guide for wiring, supported card families, serial commands,
+compile instructions, and the limits of the current hardware validation.
+
 ## To Do
 
 - To support more than one INFO PDU of P2P communication

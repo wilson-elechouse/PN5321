@@ -1,0 +1,42 @@
+name: ESP32-C3 range test
+
+on:
+  push:
+    paths:
+      - 'extras/esp32c3-range-test/**'
+      - 'tests/esp32c3-range/**'
+      - 'tools/build-esp32c3-range.ps1'
+      - '.github/workflows/esp32c3-range-test.yml'
+  pull_request:
+    paths:
+      - 'extras/esp32c3-range-test/**'
+      - 'tests/esp32c3-range/**'
+      - 'tools/build-esp32c3-range.ps1'
+      - '.github/workflows/esp32c3-range-test.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  host-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run simulated protocol and distance tests
+        run: sh tests/esp32c3-range/run.sh
+
+  compile-esp32c3:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: arduino/setup-arduino-cli@v2.0.0
+      - name: Install ESP32 core
+        run: |
+          arduino-cli core update-index --additional-urls https://espressif.github.io/arduino-esp32/package_esp32_index.json
+          arduino-cli core install esp32:esp32@3.3.8 --additional-urls https://espressif.github.io/arduino-esp32/package_esp32_index.json
+      - name: Compile the standalone ESP32-C3 sketch
+        run: >-
+          arduino-cli compile
+          --fqbn "esp32:esp32:esp32c3:FlashMode=dio,FlashFreq=40,FlashSize=4M,CDCOnBoot=default,UploadSpeed=115200"
+          extras/esp32c3-range-test/PN532_All_Cards_UART_Range_Test

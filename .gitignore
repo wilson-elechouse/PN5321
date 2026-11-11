@@ -43,3 +43,9 @@
 .pio
 
 # End of https://www.toptal.com/developers/gitignore/api/c++,platformio
+
+# Standalone ESP32-C3 range test outputs
+/.build/
+/.artifacts/
+/tests/esp32c3-range/build/
+/extras/esp32c3-range-test/PN532_All_Cards_UART_Range_Test/build/

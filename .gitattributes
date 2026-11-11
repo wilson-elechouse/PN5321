@@ -6,3 +6,6 @@
 # to native line endings on checkout.
 *.cpp text
 *.h text
+
+# POSIX test runner must retain LF line endings on Windows checkouts.
+*.sh text eol=lf
